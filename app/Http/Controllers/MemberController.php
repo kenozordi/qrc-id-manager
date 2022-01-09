@@ -13,11 +13,17 @@ class MemberController extends Controller
     {
         $this->memberApi = $memberApi;
     }
-    public function getMember($qr_id)
+    public function info($qr_id)
     {
+        $page_title = "Profile";
+        
         $response = $this->memberApi->info($qr_id)->getData();
         $member = $response->code == "00" ? $response->data : null;
-
-        //return view here
+        
+        if ($member) {
+            return view('admin.members.member', compact('member', 'page_title'));
+        } else {
+            return view('admin.members.notFound');
+        }
     }
 }

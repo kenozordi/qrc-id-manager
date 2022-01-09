@@ -14,5 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('admin.layout.default');
 });
+
+Route::get('member/{qr_id}', 'MemberController@info');
