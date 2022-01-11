@@ -3,17 +3,18 @@
 
 <ul class="sidebar-nav" id="sidebar-nav">
 
-  <li class="nav-item">
-    <a id="dashboard" class="nav-link sidebar-link collapsed" href="index.html">
+  <!-- <li class="nav-item">
+    <a id="dashboard" class="nav-link sidebar-link collapsed" href="{{ route('admin.dashboard') }}">
       <i class="bi bi-grid"></i>
       <span>Dashboard</span>
     </a>
-  </li><!-- End Dashboard Nav -->
+  </li> -->
+  <!-- End Dashboard Nav -->
 
   <li class="nav-item">
-    <a id="profile" class="nav-link sidebar-link collapsed" href="#">
+    <a id="profile" class="nav-link sidebar-link collapsed" href="{{ route('admin.dashboard') }}">
       <i class="bi bi-person"></i>
-      <span>Profile</span>
+      <span>Members</span>
     </a>
   </li><!-- End Profile Page Nav -->
 

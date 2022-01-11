@@ -17,4 +17,17 @@ Route::get('/', function () {
     return view('admin.layout.default');
 });
 
-Route::get('member/{qr_id}', 'MemberController@info');
+// Admin Routes
+Route::prefix('admin')->name('admin.')->group(function() {
+    Route::get('/login', 'AdminController@login')->name('login');
+    Route::post('/auth', 'AdminController@auth')->name('auth');
+    Route::get('/logout', 'AdminController@logout')->name('logout');
+
+    Route::group(['middleware' => 'auth:admin'], function () {
+        Route::get('dashboard', 'AdminController@dashboard')->name('dashboard');
+        Route::prefix('member')->name('member.')->group(function() {
+            Route::get('/{qr_id}', 'MemberController@info')->name('info');
+        });
+    });
+});
+

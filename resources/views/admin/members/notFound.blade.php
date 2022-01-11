@@ -20,4 +20,4 @@
 
         </div>
     </main><!-- End #main -->
-  @endsession
+  @endsection

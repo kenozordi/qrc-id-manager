@@ -17,6 +17,29 @@ trait Validations
 		"date_joined"		=> "required|date|date_format:d-m-Y|before_or_equal:today"
 	];
 
+	public static $UpdateMember = [
+		"qr_id"				=> "string",
+		"name"				=> "string",
+		"address"			=> "string",
+		"phone_number"		=> "string",
+		"email"				=> "email",
+		"company"			=> "string",
+		"membership_cadre"	=> "string|in:fellow,member,associate,graduate,technologist,student",
+		"dmn"				=> "string|unique:members,dmn",
+		"date_joined"		=> "date|date_format:d-m-Y|before_or_equal:today"
+	];
+
+	public static $CreateAdmin = [
+		"name"		=> "required|string",
+		"email"		=> "required|email|unique:admins,email",
+		"password"	=> "required|string"
+	];
+
+	public static $LoginAdmin = [
+		"email"		=> "required|email|exists:admins,email",
+		"password"	=> "required"
+	];
+
 	/**
 	 * Error message method
 	 * @param Mixed $errorArray

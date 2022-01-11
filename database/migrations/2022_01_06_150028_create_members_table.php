@@ -24,6 +24,7 @@ class CreateMembersTable extends Migration
             $table->string('membership_cadre')->default('student');
             $table->string('dmn');
             $table->string('date_joined');
+            $table->string('status')->default('active');
             $table->timestamps();
         });
     }
