@@ -16,6 +16,10 @@ class Member extends Model
         'name',
         'address',
         'phone_number',
+        'email',
+        'company',
+        'membership_cadre',
+        'dmn',
         'date_joined'
     ];
 

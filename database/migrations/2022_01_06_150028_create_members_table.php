@@ -19,7 +19,12 @@ class CreateMembersTable extends Migration
             $table->string('name');
             $table->string('address');
             $table->string('phone_number');
+            $table->string('email');
+            $table->string('company')->default('freelance');
+            $table->string('membership_cadre')->default('student');
+            $table->string('dmn');
             $table->string('date_joined');
+            $table->string('status')->default('active');
             $table->timestamps();
         });
     }
