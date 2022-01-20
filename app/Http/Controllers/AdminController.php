@@ -30,7 +30,6 @@ class AdminController extends Controller
      * Authenticate admin
      * 
      * @param \Illuminate\Http\Request
-     * @return \Illuminate\Http\Response
      */
     public function auth(Request $request)
     {

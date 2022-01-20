@@ -18,7 +18,7 @@ class MemberApi extends Controller
      * 
      * @var
      */
-    private $memberService;
+    protected $memberService;
 
 
     /**

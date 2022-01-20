@@ -9,8 +9,8 @@ trait Validations
 	public static $CreateMember = [
 		"name"				=> "required|string",
 		"address"			=> "required|string",
-		"phone_number"		=> "required|string",
-		"email"				=> "required|email",
+		"phone_number"		=> "required|string|unique:members,phone_number",
+		"email"				=> "required|email|unique:members,email",
 		"company"			=> "string",
 		"membership_cadre"	=> "string|in:fellow,member,associate,graduate,technologist,student",
 		"dmn"				=> "required|string|unique:members,dmn",
