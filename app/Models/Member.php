@@ -20,7 +20,8 @@ class Member extends Model
         'company',
         'membership_cadre',
         'dmn',
-        'date_joined'
+        'date_joined',
+        'status'
     ];
 
     /**

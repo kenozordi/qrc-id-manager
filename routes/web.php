@@ -22,7 +22,7 @@ Route::prefix('admin')->name('admin.')->group(function() {
     Route::get('/login', 'AdminController@login')->name('login');
     Route::post('/auth', 'AdminController@auth')->name('auth');
     Route::get('/logout', 'AdminController@logout')->name('logout');
-
+    
     Route::group(['middleware' => 'auth:admin'], function () {
         Route::get('dashboard', 'AdminController@dashboard')->name('dashboard');
         Route::prefix('member')->name('member.')->group(function() {
@@ -30,4 +30,15 @@ Route::prefix('admin')->name('admin.')->group(function() {
         });
     });
 });
+
+// Member Routes
+Route::prefix('member')->name('member.')->group(function() {
+    Route::get('/login', 'MemberController@login')->name('login');
+    Route::post('/auth', 'MemberController@auth')->name('auth');
+    Route::get('/dashboard/{qr_id}', 'MemberController@dashboard')->name('dashboard');
+    Route::get('/logout', 'MemberController@logout')->name('logout');
+});
+
+// Public Routes
+Route::get('search/{qr_id}', 'HomeController@search')->name('search.member');
 

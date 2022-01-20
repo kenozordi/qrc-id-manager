@@ -46,7 +46,6 @@
                       <tr>
                         <th scope="col">Name</th>
                         <th scope="col">Membership</th>
-                        <th scope="col">Date Joined</th>
                         <th scope="col">Status</th>
                       </tr>
                     </thead>
@@ -55,7 +54,6 @@
                             <tr>
                                 <td><a href="{{ route('admin.member.info', ['qr_id' => $member->qr_id])}}">{{$member->name}}</a></td>
                                 <td>{{$member->membership_cadre}}</td>
-                                <td>{{$member->date_joined}}</td>
                                 <td><span class="badge bg-{{$member->status == 'active' ? 'success' : 'danger'}}">{{$member->status}}</span></td>
                             </tr>
                         @endforeach

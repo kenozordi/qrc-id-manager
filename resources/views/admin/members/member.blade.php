@@ -24,7 +24,7 @@
 
               <img src="{{asset('admin')}}/assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
               <h2>{{$member->name}}</h2>
-              <h3>{{$member->phone_number}}</h3>
+              <h3>{{$member->membership_cadre}}</h3>
               <div class="social-links mt-2">
                 <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
                 <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
@@ -49,6 +49,18 @@
 
                 <li class="nav-item">
                   <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Edit Profile</button>
+                </li>
+
+                <li class="nav-item">
+                  <button class="nav-link" data-bs-toggle="tab" >Debt Status</button>
+                </li>
+
+                <li class="nav-item">
+                  <button class="nav-link" data-bs-toggle="tab" >Attendance</button>
+                </li>
+
+                <li class="nav-item">
+                  <button class="nav-link" data-bs-toggle="tab" >Score Points</button>
                 </li>
 
               </ul>

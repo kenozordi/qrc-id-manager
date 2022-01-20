@@ -5,9 +5,8 @@
   @include('admin.layout.partials.header')
 </head>
 
-<body class="toggle-sidebar">
-    @include('admin.layout.partials.nav')
-
+<body>
+      
     @yield('content')
 
     @include('admin.layout.partials.footerScripts')

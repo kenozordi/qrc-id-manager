@@ -12,9 +12,9 @@
   <!-- End Dashboard Nav -->
 
   <li class="nav-item">
-    <a id="profile" class="nav-link sidebar-link collapsed" href="{{ route('admin.dashboard') }}">
+    <a id="profile" class="nav-link sidebar-link collapsed" href="{{ route('member.dashboard', ['qr_id' => $member->qr_id]) }}">
       <i class="bi bi-person"></i>
-      <span>Members</span>
+      <span>Profile</span>
     </a>
     
     <a id="profile" class="nav-link sidebar-link collapsed" href="#">
@@ -37,7 +37,7 @@
 <!-- Select active tab on the sidebar -->
 <script>
     $(document).ready( function() {
-        var pageTitle = ("{{ $page_title ?? ''}}").toString();
+        var pageTitle = ("{{ $page_title ?? '' }}").toString();
         var sidebarLinks = document.getElementsByClassName("sidebar-link");
           for(var i = 0; i < sidebarLinks.length; i++)
           {

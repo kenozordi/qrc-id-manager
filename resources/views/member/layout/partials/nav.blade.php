@@ -1,11 +1,10 @@
 <!-- ======= Header ======= -->
 <header id="header" class="header fixed-top d-flex align-items-center">
 
-@if(Auth::guard('admin')->check())
 <div class="d-flex align-items-center justify-content-between">
-  <a href="{{ route('admin.login') }}" class="logo d-flex align-items-center">
+  <a href="{{ route('member.login') }}" class="logo d-flex align-items-center">
     <img src="{{asset('img')}}/NIA-Logo-Black-Transparent.png" alt="Logo">
-    <span class="d-none d-lg-block">Admin Portal</span>
+    <span class="d-none d-lg-block">Member Portal</span>
   </a>
   <i class="bi bi-list toggle-sidebar-btn"></i>
 </div><!-- End Logo -->
@@ -17,16 +16,6 @@
   </form>
 </div><!-- End Search Bar -->
 
-@else
-
-<div class="d-flex align-items-center justify-content-between">
-  <a href="index.html" class="logo d-flex align-items-center">
-    <img src="{{asset('img')}}/NIA-Logo-Black-Transparent.png" alt="Logo">
-    <span class="d-none d-lg-block">NIA Abuja</span>
-  </a>
-</div><!-- End Logo -->
-@endif
-
 <nav class="header-nav ms-auto">
   <ul class="d-flex align-items-center">
 
@@ -35,7 +24,7 @@
         <i class="bi bi-search"></i>
       </a>
     </li><!-- End Search Icon-->
-  @if(Auth::guard('admin')->check())
+
     <li class="nav-item dropdown">
 
       <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
@@ -58,13 +47,13 @@
 
       <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
         <img src="{{asset('admin')}}/assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-        <span class="d-none d-md-block dropdown-toggle ps-2">{{Auth::guard('admin')->user()->name}}</span>
+        <span class="d-none d-md-block dropdown-toggle ps-2">{{$member->name}}</span>
       </a><!-- End Profile Iamge Icon -->
 
       <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
         <li class="dropdown-header">
-          <h6>{{Auth::guard('admin')->user()->name}}</h6>
-          <span>Admin</span>
+          <h6>{{$member->name}}</h6>
+          <span>Member</span>
         </li>
 
         <li>
@@ -72,7 +61,7 @@
         </li>
 
         <li>
-          <a class="dropdown-item d-flex align-items-center" href="{{ route('admin.logout') }}">
+          <a class="dropdown-item d-flex align-items-center" href="{{ route('member.logout') }}">
             <i class="bi bi-box-arrow-right"></i>
             <span>Sign Out</span>
           </a>
@@ -80,15 +69,7 @@
 
       </ul><!-- End Profile Dropdown Items -->
     </li><!-- End Profile Nav -->
-  @else
-
-    <li class="nav-item dropdown">
-
-      <button type="button" class="btn btn-primary m-4"> Login <i class="bx bxs-right-arrow-circle me-1"></i></button>
-
-    </li><!-- End Messages Nav -->
-  @endif
-
+  
   </ul>
 </nav><!-- End Icons Navigation -->
 
