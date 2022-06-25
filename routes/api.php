@@ -19,7 +19,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 // Admin Routes
-Route::prefix('admin')->group(function() {
+Route::prefix('admin')->group(function () {
     Route::post('/', 'AdminApi@store');
     Route::post('/auth', 'AdminApi@authenticate');
     Route::post('/logout', 'AdminApi@logout');
@@ -27,8 +27,10 @@ Route::prefix('admin')->group(function() {
 });
 
 // Member Routes
-Route::prefix('member')->group(function() {
+Route::prefix('member')->group(function () {
     Route::post('/', 'MemberApi@store');
+    Route::post('/auth', 'MemberApi@authenticate');
+    Route::post('/logout', 'MemberApi@logout');
     Route::get('/members', 'MemberApi@all');
     Route::get('/{qr_id}', 'MemberApi@info');
     Route::put('/{qr_id}', 'MemberApi@update');

@@ -11,10 +11,10 @@ trait Validations
 		"address"			=> "required|string",
 		"phone_number"		=> "required|string|unique:members,phone_number",
 		"email"				=> "required|email|unique:members,email",
-		"company"			=> "string",
-		"membership_cadre"	=> "string|in:fellow,member,associate,graduate,technologist,student",
-		"dmn"				=> "required|string|unique:members,dmn",
-		"date_joined"		=> "required|date|date_format:d-m-Y|before_or_equal:today"
+		"company"			=> "nullable|string",
+		"link"				=> "required|string",
+		"date_joined"		=> "nullable|date_format:d-m-Y|before_or_equal:today",
+		"password"		=> "required|string",
 	];
 
 	public static $UpdateMember = [
@@ -24,8 +24,7 @@ trait Validations
 		"phone_number"		=> "string",
 		"email"				=> "email",
 		"company"			=> "string",
-		"membership_cadre"	=> "string|in:fellow,member,associate,graduate,technologist,student",
-		"dmn"				=> "string|unique:members,dmn",
+		"link"				=> "string",
 		"date_joined"		=> "date|date_format:d-m-Y|before_or_equal:today"
 	];
 
@@ -37,6 +36,11 @@ trait Validations
 
 	public static $LoginAdmin = [
 		"email"		=> "required|email|exists:admins,email",
+		"password"	=> "required"
+	];
+
+	public static $LoginMember = [
+		"email"		=> "required|email|exists:members,email",
 		"password"	=> "required"
 	];
 

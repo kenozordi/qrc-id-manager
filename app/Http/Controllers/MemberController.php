@@ -29,36 +29,53 @@ class MemberController extends Controller
     /**
      * Show member details
      * 
-     * @param string $qr_id A unique id tied to a members QR Code
+     * @param string $qr_id A unique id tied to a members 
      */
     public function info($qr_id)
     {
         $page_title = "Profile";
-        
+
         $response = $this->memberApi->info($qr_id)->getData();
         $member = $response->code == "00" ? $response->data : null;
-        
+
         if ($member) {
-            return view('admin.members.member', compact('member', 'page_title'));
+            return view('member.profile', compact('member', 'page_title'));
         } else {
-            return view('admin.members.notFound');
+            return view('member.layout.notFound');
         }
     }
 
     /**
      * Show member dashboard
      * 
-     * @param string $qr_id A unique id tied to a members QR Code
+     * @param string $uuid member uuid
      */
-    public function dashboard($qr_id)
+    public function dashboard($uuid)
     {
         $page_title = "Dashboard";
-        
-        $response = $this->memberApi->info($qr_id)->getData();
+
+        $response = $this->memberApi->info($uuid)->getData();
         $member = $response->code == "00" ? $response->data : null;
-        
+
         if ($member) {
             return view('member.dashboard', compact('member', 'page_title'));
+        } else {
+            return view('admin.members.notFound');
+        }
+    }
+
+    /**
+     * Upooad member QR Code
+     * 
+     * @param \Illuminate\Http\Request
+     */
+    public function uploadCode(Request $request)
+    {
+        $response = $this->memberApi->uploadCode($request)->getData();
+        $result = $response->code == "00" ? true : false;
+
+        if ($result) {
+            return back();
         } else {
             return view('admin.members.notFound');
         }
@@ -72,19 +89,46 @@ class MemberController extends Controller
      */
     public function auth(Request $request)
     {
-        $memberCredentials = $request->only('email', 'password');
+        $response = $this->memberApi->authenticate($request)->getData();
+        $member = $response->code == "00" ? $response->data : null;
 
-        // This will be replaced by member auth guard
-        $defaultPass = "1234";
-        $member = $this->memberService->getRecord('email', $memberCredentials['email']);
-
-        if ($member && $memberCredentials['password'] == $defaultPass) {
-            return view('member.dashboard', compact('member'))
+        if ($member) {
+            return redirect()
+                ->intended(route('member.dashboard', ['qr_id' => $member->qr_id]))
                 ->with('status', 'You are logged in successfullly');
         } else {
             return back()
-            ->withInput()
-            ->with('error','Login failed, please try again!');
+                ->withInput()
+                ->with('error', 'Login failed, please try again!');
+        }
+    }
+
+    /**
+     * Show Member registeration form
+     * 
+     */
+    public function registerForm()
+    {
+        return view("member.registerForm");
+    }
+
+    /**
+     * Submit Member registeration form
+     * 
+     * @param \Illuminate\Http\Request
+     */
+    public function register(Request $request)
+    {
+        $response = $this->memberApi->store($request)->getData();
+        $member = $response->code == "00" ? $response->data : null;
+
+        if ($member) {
+            return redirect()->route('member.dashboard', ['uuid' => $member->uuid])
+                ->with('status', 'Registration successfullly');
+        } else {
+            return back()
+                ->withInput()
+                ->with('error', 'Registration failed, please try again!');
         }
     }
 
@@ -94,7 +138,6 @@ class MemberController extends Controller
      */
     public function login()
     {
-        
         return view("member.login");
     }
 
@@ -106,8 +149,5 @@ class MemberController extends Controller
     public function logout()
     {
         return redirect()->route('member.login');
-
     }
-    
-
 }

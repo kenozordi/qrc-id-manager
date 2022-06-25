@@ -11,8 +11,8 @@
             <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
 
               <div class="d-flex justify-content-center py-4">
-                <a href="index.html" class="logo d-flex align-items-center w-auto">
-                  <img src="{{asset('img')}}/NIA-Logo-Black-Transparent.png" alt="">
+                <a href="#" class="logo d-flex align-items-center w-auto">
+                  <img src="{{asset('img')}}/qr-code.png" alt="">
                 </a>
               </div><!-- End Logo -->
 
@@ -72,6 +72,7 @@
                       <button class="btn btn-primary w-100" type="submit">Login</button>
                     </div>
                     <div class="col-12">
+                      <p class="small mb-0">Don't have account? <a href="{{ route('member.registerForm')}}">Create an account</a></p>
                       <p class="small mb-0"><a href="{{ route('admin.login') }}">Login as Admin</a></p>
                     </div>
                   </form>

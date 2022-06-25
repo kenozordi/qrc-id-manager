@@ -45,7 +45,6 @@
                     <thead>
                       <tr>
                         <th scope="col">Name</th>
-                        <th scope="col">Membership</th>
                         <th scope="col">Status</th>
                       </tr>
                     </thead>
@@ -53,7 +52,6 @@
                         @foreach ($members as $member)
                             <tr>
                                 <td><a href="{{ route('admin.member.info', ['qr_id' => $member->qr_id])}}">{{$member->name}}</a></td>
-                                <td>{{$member->membership_cadre}}</td>
                                 <td><span class="badge bg-{{$member->status == 'active' ? 'success' : 'danger'}}">{{$member->status}}</span></td>
                             </tr>
                         @endforeach
@@ -75,7 +73,7 @@
           <div class="card">
             
             <div class="card-body">
-              <h5 class="card-title">Membership Cadre Ranking <span></span></h5>
+              <h5 class="card-title">QR Scans <span></span></h5>
 
               <div class="activity">
 
@@ -83,7 +81,7 @@
                   <div class="activite-label">1</div>
                   <i class='bi bi-circle-fill activity-badge text-success align-self-start'></i>
                   <div class="activity-content">
-                    Fellow
+                    Scan 1
                   </div>
                 </div><!-- End activity item-->
 
@@ -91,7 +89,7 @@
                   <div class="activite-label">2</div>
                   <i class='bi bi-circle-fill activity-badge text-danger align-self-start'></i>
                   <div class="activity-content">
-                    Member
+                    Scan 2
                   </div>
                 </div><!-- End activity item-->
 
@@ -99,7 +97,7 @@
                   <div class="activite-label">3</div>
                   <i class='bi bi-circle-fill activity-badge text-primary align-self-start'></i>
                   <div class="activity-content">
-                    Associate
+                    Scan 3
                   </div>
                 </div><!-- End activity item-->
 
@@ -107,7 +105,7 @@
                   <div class="activite-label">4</div>
                   <i class='bi bi-circle-fill activity-badge text-info align-self-start'></i>
                   <div class="activity-content">
-                    Graduate
+                    Scan 4
                   </div>
                 </div><!-- End activity item-->
 
@@ -115,7 +113,7 @@
                   <div class="activite-label">5</div>
                   <i class='bi bi-circle-fill activity-badge text-warning align-self-start'></i>
                   <div class="activity-content">
-                    Technologist
+                    Scan 5
                   </div>
                 </div><!-- End activity item-->
 
@@ -123,7 +121,7 @@
                   <div class="activite-label">6</div>
                   <i class='bi bi-circle-fill activity-badge text-muted align-self-start'></i>
                   <div class="activity-content">
-                    Student
+                    Scan 6
                   </div>
                 </div><!-- End activity item-->
 

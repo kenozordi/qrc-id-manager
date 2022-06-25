@@ -3,7 +3,7 @@
 
 <div class="d-flex align-items-center justify-content-between">
   <a href="{{ route('member.login') }}" class="logo d-flex align-items-center">
-    <img src="{{asset('img')}}/NIA-Logo-Black-Transparent.png" alt="Logo">
+    <img src="{{asset('img')}}/qr-code.png" alt="Logo">
     <span class="d-none d-lg-block">Member Portal</span>
   </a>
   <i class="bi bi-list toggle-sidebar-btn"></i>
@@ -29,7 +29,7 @@
 
       <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
         <i class="bi bi-bell"></i>
-        <span class="badge bg-primary badge-number">4</span>
+        <span class="badge bg-primary badge-number">0</span>
       </a><!-- End Notification Icon -->
 
     </li><!-- End Notification Nav -->
@@ -38,7 +38,7 @@
 
       <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
         <i class="bi bi-chat-left-text"></i>
-        <span class="badge bg-success badge-number">3</span>
+        <span class="badge bg-success badge-number">0</span>
       </a><!-- End Messages Icon -->
 
     </li><!-- End Messages Nav -->

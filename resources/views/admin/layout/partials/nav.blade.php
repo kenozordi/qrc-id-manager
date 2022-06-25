@@ -4,7 +4,7 @@
 @if(Auth::guard('admin')->check())
 <div class="d-flex align-items-center justify-content-between">
   <a href="{{ route('admin.login') }}" class="logo d-flex align-items-center">
-    <img src="{{asset('img')}}/NIA-Logo-Black-Transparent.png" alt="Logo">
+    <img src="{{asset('img')}}/qr-code.png" alt="Logo">
     <span class="d-none d-lg-block">Admin Portal</span>
   </a>
   <i class="bi bi-list toggle-sidebar-btn"></i>
@@ -21,8 +21,8 @@
 
 <div class="d-flex align-items-center justify-content-between">
   <a href="index.html" class="logo d-flex align-items-center">
-    <img src="{{asset('img')}}/NIA-Logo-Black-Transparent.png" alt="Logo">
-    <span class="d-none d-lg-block">NIA Abuja</span>
+    <img src="{{asset('img')}}/qr-code.png" alt="Logo">
+    <span class="d-none d-lg-block">QR Admin</span>
   </a>
 </div><!-- End Logo -->
 @endif
@@ -40,7 +40,7 @@
 
       <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
         <i class="bi bi-bell"></i>
-        <span class="badge bg-primary badge-number">4</span>
+        <span class="badge bg-primary badge-number">0</span>
       </a><!-- End Notification Icon -->
 
     </li><!-- End Notification Nav -->
@@ -49,7 +49,7 @@
 
       <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
         <i class="bi bi-chat-left-text"></i>
-        <span class="badge bg-success badge-number">3</span>
+        <span class="badge bg-success badge-number">0</span>
       </a><!-- End Messages Icon -->
 
     </li><!-- End Messages Nav -->

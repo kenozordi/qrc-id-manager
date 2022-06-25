@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Member extends Model
+class Member extends Authenticatable
 {
+    use Notifiable;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -13,13 +16,13 @@ class Member extends Model
      */
     protected $fillable = [
         'qr_id',
+        'qr_image_path',
         'name',
         'address',
         'phone_number',
         'email',
-        'company',
-        'membership_cadre',
-        'dmn',
+        'password',
+        'link',
         'date_joined',
         'status'
     ];
@@ -29,5 +32,5 @@ class Member extends Model
      *
      * @var array
      */
-    protected $hidden = ['id', 'created_at', 'updated_at'];
+    protected $hidden = ['password', 'id', 'created_at', 'updated_at'];
 }

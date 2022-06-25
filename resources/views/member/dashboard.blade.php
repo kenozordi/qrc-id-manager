@@ -5,12 +5,12 @@
 <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Profile</h1>
+      <h1>Dashboard</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
           <li class="breadcrumb-item">Member</li>
-          <li class="breadcrumb-item active">Profile</li>
+          <li class="breadcrumb-item active">Dashboard</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
@@ -23,7 +23,7 @@
 
             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
               <img src="{{asset('admin')}}/assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-              <a href="#" class="btn btn-primary mt-3">Edit Profile</a>
+              <a href="{{ route('member.profile', $member->qr_id) }}" class="btn btn-primary mt-3">Edit Profile</a>
             </div>
             
           </div>

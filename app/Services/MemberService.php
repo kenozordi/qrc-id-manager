@@ -3,6 +3,9 @@
 namespace App\Services;
 
 use App\Models\Member;
+use Illuminate\Support\Facades\Hash;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
+use Illuminate\Support\Facades\Log;
 
 class MemberService
 {
@@ -15,6 +18,7 @@ class MemberService
 	public function store($data)
 	{
 		$data['qr_id'] = uniqid() . rand(100, 1000);
+		$data['password'] = Hash::make($data['password']);
 		return Member::create($data);
 	}
 
@@ -46,6 +50,27 @@ class MemberService
 	public function getRecord($fieldName, $fieldValue)
 	{
 		return Member::where($fieldName, $fieldValue)->first();
+	}
+
+	/**
+	 * 
+	 * @return \App\Models\Member
+	 */
+	public function uploadCode($request)
+	{
+		$user = $request->user();
+
+		$temp_file_path = $request->file('qr_image')->getRealPath();
+
+		try {
+			$uploaded_file_url = Cloudinary::upload($temp_file_path)->getSecurePath();
+			$user->qr_image_path = $uploaded_file_url;
+			$user->save();
+			return true;
+		} catch (\Throwable $th) {
+			Log::error($th->getMessage());
+			return false;
+		}
 	}
 
 

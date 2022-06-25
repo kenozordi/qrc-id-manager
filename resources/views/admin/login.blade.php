@@ -12,7 +12,7 @@
 
               <div class="d-flex justify-content-center py-4">
                 <a href="index.html" class="logo d-flex align-items-center w-auto">
-                  <img src="{{asset('img')}}/NIA-Logo-Black-Transparent.png" alt="">
+                  <img src="{{asset('img')}}/qr-code.png" alt="">
                 </a>
               </div><!-- End Logo -->
 

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Services\Validations;
 use App\Services\ResponseFormat;
 use Exception;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
@@ -31,6 +32,66 @@ class MemberApi extends Controller
     }
 
     /**
+     * **used to authenticate user**
+     * @param \Illuminate\Http\Request $request containing user credentials
+     * @return \Illuminate\Http\Response
+     */
+    public function authenticate(Request $request)
+    {
+        try {
+            $validator = Validator::make($request->all(), Validations::$LoginMember);
+            if ($validator->fails()) return ResponseFormat::returnFailed(Validations::formatError($validator->errors()));
+
+            if (Auth::guard('member')->attempt($request->only('email', 'password'), $request->filled('remember'))) {
+                $member = $this->memberService->getRecord('email', $request->email);
+                return ResponseFormat::returnSuccess($member);
+            }
+            return ResponseFormat::returnFailed("Failed to Login Member");
+        } catch (Exception $e) {
+            Log::error($e);
+            return ResponseFormat::returnSystemFailure();
+        }
+    }
+
+    /**
+     * Check if member is authenticated
+     * 
+     * @return \Illuminate\Http\Response
+     */
+    public function checkAuth()
+    {
+        try {
+            if (Auth::guard('member')->check()) {
+                return ResponseFormat::returnSuccess();
+            } else {
+                return ResponseFormat::returnFailed();
+            }
+        } catch (Exception $e) {
+            Log::error($e);
+            return ResponseFormat::returnSystemFailure();
+        }
+    }
+
+    /**
+     * Log member out
+     * 
+     * @return \Illuminate\Http\Response
+     */
+    public function logout()
+    {
+        try {
+            if (Auth::guard('member')->logout()) {
+                return ResponseFormat::returnSuccess();
+            } else {
+                return ResponseFormat::returnFailed();
+            }
+        } catch (Exception $e) {
+            Log::error($e);
+            return ResponseFormat::returnSystemFailure();
+        }
+    }
+
+    /**
      * Create a member
      * 
      * @param  \Illuminate\Http\Request  $request
@@ -41,10 +102,10 @@ class MemberApi extends Controller
         try {
             $validator = Validator::make($request->all(), Validations::$CreateMember);
             if ($validator->fails()) return ResponseFormat::returnFailed(Validations::formatError($validator->errors()));
-    
+
             $validated = $validator->validated();
             $member = $this->memberService->store($validated);
-    
+
             if ($member) {
                 return ResponseFormat::returnSuccess($member);
             } else {
@@ -54,7 +115,6 @@ class MemberApi extends Controller
             Log::error($ex->getMessage());
             return ResponseFormat::returnSystemFailure();
         }
-
     }
 
     /**
@@ -65,11 +125,33 @@ class MemberApi extends Controller
      */
     public function info($qr_id)
     {
-        try {            
+        try {
             $member = $this->memberService->getRecord('qr_id', $qr_id);
-    
+
             if ($member) {
                 return ResponseFormat::returnSuccess($member);
+            } else {
+                return ResponseFormat::returnNotFound("Member not found");
+            }
+        } catch (Exception $ex) {
+            Log::error($ex->getMessage());
+            return ResponseFormat::returnSystemFailure();
+        }
+    }
+
+    /**
+     * Upload member QR Code
+     * 
+     * @param \Illuminate\Http\Request
+     * @return \Illuminate\Http\Response
+     */
+    public function uploadCode($request)
+    {
+        try {
+            $result = $this->memberService->uploadCode($request);
+
+            if ($result) {
+                return ResponseFormat::returnSuccess();
             } else {
                 return ResponseFormat::returnNotFound("Member not found");
             }
@@ -86,9 +168,9 @@ class MemberApi extends Controller
      */
     public function all()
     {
-        try {            
+        try {
             $members = $this->memberService->getAll();
-    
+
             if ($members) {
                 return ResponseFormat::returnSuccess($members);
             } else {
@@ -107,7 +189,7 @@ class MemberApi extends Controller
      */
     public function update($qr_id, Request $request)
     {
-        try {            
+        try {
             $validator = Validator::make($request->all(), Validations::$UpdateMember);
             if ($validator->fails()) return ResponseFormat::returnFailed(Validations::formatError($validator->errors()));
 

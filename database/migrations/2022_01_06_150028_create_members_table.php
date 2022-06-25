@@ -16,15 +16,16 @@ class CreateMembersTable extends Migration
         Schema::create('members', function (Blueprint $table) {
             $table->id();
             $table->uuid('qr_id');
+            $table->string('qr_image_path')->nullable();
             $table->string('name');
             $table->string('address');
             $table->string('phone_number');
             $table->string('email');
             $table->string('company')->default('freelance');
-            $table->string('membership_cadre')->default('student');
-            $table->string('dmn');
-            $table->string('date_joined');
+            $table->string('link');
+            $table->string('date_joined')->nullable();
             $table->string('status')->default('active');
+            $table->string('password');
             $table->timestamps();
         });
     }

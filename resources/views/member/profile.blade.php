@@ -1,5 +1,5 @@
 
-@extends('admin.layout.default')
+@extends('member.layout.default')
 
 @section('content')
 <main id="main" class="main">
@@ -22,15 +22,25 @@
           <div class="card">
             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
-              <img src="{{asset('admin')}}/assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
               <h2>{{$member->name}}</h2>
-              <h3>{{$member->membership_cadre}}</h3>
-              <div class="social-links mt-2">
-                <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
-                <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-                <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-                <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
-              </div>
+              <h3>{{$member->link}}</h3>
+              <img src="{{ $member->qr_image_path }}" class="rounded-circle">
+
+              <form method="POST" action="{{route('member.uploadCode') }}" enctype="multipart/form-data">
+                @csrf
+                <div class="row mb-3">
+                  <label for="inputNumber" class="col-md-12 col-lg-12 col-form-label">File Upload</label>
+                  <div class="col-md-12 col-lg-12">
+                    <input required name="qr_image" class="form-control" type="file" id="formFile">
+                  </div>
+                </div>
+                <div class="pt-2">
+                  <button type="submit" class="btn btn-primary btn-sm" title="Upload new profile image">
+                    <i class="bi bi-upload"></i>
+                  </button>
+                </div>
+              </form>
+
             </div>
           </div>
 
@@ -100,11 +110,6 @@
                   </div>
 
                   <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Membership Cadre</div>
-                    <div class="col-lg-9 col-md-8">{{$member->membership_cadre}}</div>
-                  </div>
-
-                  <div class="row">
                     <div class="col-lg-3 col-md-4 label">Link</div>
                     <div class="col-lg-9 col-md-8">{{$member->link}}</div>
                   </div>
@@ -116,7 +121,7 @@
                   <!-- Profile Edit Form -->
                   <form>
                     <div class="row mb-3">
-                      <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
+                      <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">QR Image</label>
                       <div class="col-md-8 col-lg-9">
                         <img src="{{asset('admin')}}/assets/img/profile-img.jpg" alt="Profile">
                         <div class="pt-2">
@@ -125,6 +130,8 @@
                         </div>
                       </div>
                     </div>
+
+                   
 
                     <div class="row mb-3">
                       <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Full Name</label>
@@ -165,13 +172,6 @@
                       <label for="Email" class="col-md-4 col-lg-3 col-form-label">Email</label>
                       <div class="col-md-8 col-lg-9">
                         <input name="email" type="email" class="form-control" id="Email" value="{{$member->email}}">
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="Email" class="col-md-4 col-lg-3 col-form-label">Membership Cadre</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="email" type="email" class="form-control" id="Email" value="{{$member->membership_cadre}}">
                       </div>
                     </div>
 
