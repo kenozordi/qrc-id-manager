@@ -1,6 +1,6 @@
 ## About qrc-id-manager
 
-Identity Management App that uses QR (Quick Response) Codes to validate membership and privilege
+Identity Management App that uses QR (Quick Response) Codes to manage membership and privilege
 
 ## How to set-up
 
